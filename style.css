@@ -1,0 +1,26 @@
+body {
+    background: #f0f0f0;
+    color: #333333;
+    padding: 10px 50px;
+}
+
+a {
+    text-decoration: none;
+    color: blue;
+    transition: 0.3s color;
+}
+
+a:hover {
+    color: orange;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+.title {
+    font-weight: bold;
+}
+.ref-description {
+    font-size: 0.8em;
+}
