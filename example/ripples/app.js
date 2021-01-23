@@ -1,6 +1,6 @@
-import { Ripple } from './ripple';
-import { Dot } from '.dot';
-import { collide } from './utils';
+import { Ripple } from './ripple.js';
+import { Dot } from './dot.js';
+import { collide } from './utils.js';
 
 class App {
     constructor() {
@@ -31,7 +31,7 @@ class App {
         };
 
         this.image = new Image();
-        this.image.src = '이미지명';
+        this.image.src = 'vincent.jpg';
         this.image.onload = () => {
             this.isLoaded = true;
             this.drawImage();
@@ -47,7 +47,7 @@ class App {
         this.stageHeight = document.body.clientHeight;
 
         this.canvas.width = this.stageWidth * this.pixelRatio;
-        this.canvas.hegith = this.stageHeight * this.pixelRatio;
+        this.canvas.height = this.stageHeight * this.pixelRatio;
         this.ctx.scale(this.pixelRatio, this.pixelRatio);
         
         this.tmpCanvas.width = this.stageWidth;
@@ -101,7 +101,7 @@ class App {
 
         this.imgData = this.tmpCtx.getImageData(0, 0, this.stageWidth, this.stageHeight);
 
-        this.drowDots();
+        this.drawDots();
     }
 
     drawDots() {
@@ -138,15 +138,14 @@ class App {
     animate() {
         window.requestAnimationFrame(this.animate.bind(this));
 
-        // this.ripple.animate(this.ctx);
-        this.ripple.animate();
+        this.ripple.animate(this.ctx);
 
         for (let i = 0; i < this.dots.length; i++) {
             const dot = this.dots[i];
             if (collide(
                 dot.x, dot.y,
-                this.ripple.x, this.ripple,y,
-                this.ripple,this.radius
+                this.ripple.x, this.ripple.y,
+                this.ripple.radius
             )) {
                 dot.animate(this.ctx);
             }
