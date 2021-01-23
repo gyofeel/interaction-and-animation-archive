@@ -48,7 +48,7 @@ const initData = () => {
             refA.innerHTML = item.reference.title;
             refDesSpan.appendChild(document.createTextNode('(ref: '));
             refDesSpan.appendChild(refA);
-            refDesSpan.appendChild(document.createTextNode(` - ${item.reference.author}`));
+            refDesSpan.appendChild(document.createTextNode(` - ${item.reference.author})`));
             li.appendChild(titleA);
             li.appendChild(refDesSpan);
             ul.appendChild(li);
