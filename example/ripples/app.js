@@ -33,7 +33,7 @@ class App {
         };
 
         this.image = new Image();
-        this.image.src = 'vincent.jpeg';
+        this.image.src = 'vincent.jpg';
         // Image 객체를 이용해 load 타이밍 체크
         this.image.onload = () => {
             this.isLoaded = true;
