@@ -31,6 +31,13 @@ export class Ripple {
         ctx.fill();
     }
 
+    reset() {
+        this.x = 0;
+        this.y = 0;
+        this.radius = 0;
+        this.maxRadius = 0;
+    }
+
     getMax(x, y) {
         const c1 = distance(0, 0, x, y);// 화면 좌상단으로부터의 거리
         const c2 = distance(this.stageWidth, 0, x, y);// 화면 우상단으로부터의 거리

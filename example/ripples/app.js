@@ -2,8 +2,11 @@ import { Ripple } from './ripple.js';
 import { Dot } from './dot.js';
 import { collide } from './utils.js';
 
+const IMAGES = ['vincent.jpg', 'momo1.jpeg', 'momo2.jpeg', 'momo3.jpeg', 'momo4.jpeg'];
 class App {
     constructor() {
+        this.imageIdx = 0;
+        this.isPixelized = false;
         this.canvas = document.createElement('canvas');
         document.body.appendChild(this.canvas);
         this.ctx = this.canvas.getContext('2d');
@@ -32,13 +35,7 @@ class App {
             height: 0,
         };
 
-        this.image = new Image();
-        this.image.src = 'vincent.jpg';
-        // Image 객체를 이용해 load 타이밍 체크
-        this.image.onload = () => {
-            this.isLoaded = true;
-            this.drawImage();
-        }
+        this.loadImage();
 
         window.requestAnimationFrame(this.animate.bind(this));
 
@@ -65,6 +62,16 @@ class App {
         this.ripple.resize(this.stageWidth, this.stageHeight);
 
         if (this.isLoaded) {
+            this.drawImage();
+        }
+    }
+
+    loadImage() {
+        this.image = new Image();
+        this.image.src = IMAGES[this.imageIdx];
+        // Image 객체를 이용해 load 타이밍 체크
+        this.image.onload = () => {
+            this.isLoaded = true;
             this.drawImage();
         }
     }
@@ -171,7 +178,17 @@ class App {
         for (let i = 0; i < this.dots.length; i++) {
             this.dots[i].reset();
         }
-
+        if (this.isPixelized) {
+            this.imageIdx++;
+            if (this.imageIdx >= IMAGES.length) {
+                this.imageIdx = 0;
+            }
+            this.isLoaded = false;
+            this.loadImage();
+            this.isPixelized = false;
+            this.ripple.reset();
+            return;
+        }
         this.ctx.drawImage(
             this.image,
             0, 0,
@@ -181,6 +198,7 @@ class App {
         );
 
         this.ripple.start(e.offsetX, e.offsetY);
+        this.isPixelized = true;
     }
 
 
