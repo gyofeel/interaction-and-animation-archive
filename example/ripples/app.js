@@ -20,8 +20,8 @@ class App {
         window.addEventListener('resize', this.resize.bind(this), false);
         this.resize();
 
-        this.radius = 10;
-        this.pixelSize = 30;
+        this.radius = 10;// dot의 반지름 크기
+        this.pixelSize = 30;// dot이 그려지는 사각형의 크기
         this.dots = [];
 
         this.isLoaded = false;
@@ -120,18 +120,18 @@ class App {
     drawDots() {
         this.dots = [];
 
-        this.columns = Math.ceil(this.stageWidth / this.pixelSize);
-        this.rows = Math.ceil(this.stageHeight / this.pixelSize);
+        this.columns = Math.ceil(this.stageWidth / this.pixelSize);// 지정한 픽셀 크기(dot을 감싸는 사각형)의 column 개수
+        this.rows = Math.ceil(this.stageHeight / this.pixelSize);// 지정한 픽셀 크기(dot을 감싸는 사각형)의 row 개수
 
         for (let i = 0; i < this.rows; i++) {
-            const y = (i + 0.5) * this.pixelSize;
-            const pixelY = Math.max(Math.min(y, this.stageHeight), 0);
+            const y = (i + 0.5) * this.pixelSize;// 원의 중심 위치 계산을 위해 0.5 값 곱
+            const pixelY = Math.max(Math.min(y, this.stageHeight), 0);// 최소 0 ~ 쵀대 this.stageHeight 값을 가지는 y 위치 값
 
             for (let j = 0; j < this.columns; j++) {
-                const x = (j + 0.5) * this.pixelSize;
-                const pixelX = Math.max(Math.min(x, this.stageWidth), 0);
+                const x = (j + 0.5) * this.pixelSize;// 원의 중심 위치 계산을 위해 0.5 값 곱
+                const pixelX = Math.max(Math.min(x, this.stageWidth), 0);// 최소 0 ~ 쵀대 this.stageHeight 값을 가지는 x 위치 값
 
-                const pixelIndex = (pixelX + pixelY * this.stageWidth) * 4;
+                const pixelIndex = (pixelX + pixelY * this.stageWidth) * 4;// 픽셀 인덱스 값. 이미지를 이루는 픽셀 값 데이터가 배열 상의 4개 씩 값을 이룸. red, green, blue, alpha -> 그래서 4를 곱함
                 const red = this.imgData.data[pixelIndex + 0];
                 const green = this.imgData.data[pixelIndex + 1];
                 const blue = this.imgData.data[pixelIndex + 2];
