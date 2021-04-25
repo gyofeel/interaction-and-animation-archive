@@ -4,7 +4,7 @@ const DATA = [
         list: [
             {
                 title: 'Wave Animation',
-                entry: './example/wave/index.html',
+                entry: './example/html5-canvas/wave/index.html',
                 reference: {
                     title: 'HTML5 Canvas Tutorial : 움직이는 웨이브 만들기',
                     author: 'Interactive Developer',
@@ -13,11 +13,25 @@ const DATA = [
             },
             {
                 title: 'Ripples Animation',
-                entry: './example/ripples/index.html',
+                entry: './example/html5-canvas/ripples/index.html',
                 reference: {
                     title: 'HTML5 Canvas Tutorial : 자바스크립트로 컬러 추출해서 물결 효과 만들기',
                     author: 'Interactive Developer',
                     link: 'https://youtu.be/kpF0n39xXVM'
+                }
+            }
+        ]
+    },
+    {
+        subject: 'CSS',
+        list: [
+            {
+                title: 'Water Wave Text Animation',
+                entry: './example/css/wave-text/index.html',
+                reference: {
+                    title: 'Pure CSS3 Water Wave Text Animation Effects Using CSS Clip-path',
+                    author: 'Online Tutorials',
+                    link: 'https://youtu.be/Tf6qm5JMUXQ'
                 }
             }
         ]
