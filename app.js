@@ -33,6 +33,15 @@ const DATA = [
                     author: 'Online Tutorials',
                     link: 'https://youtu.be/Tf6qm5JMUXQ'
                 }
+            },
+            {
+                title: 'Neumorphism Effect',
+                entry: './example/css/neumorphism/index.html',
+                reference: {
+                    title: 'How To Create Neumorphism Effect With CSS | HTML CSS Effects | Elementor | Web Cifar 2020',
+                    author: 'WEB CIFAR',
+                    link: 'https://youtu.be/PLTJr7fLv4E'
+                }
             }
         ]
     }
