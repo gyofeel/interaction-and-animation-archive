@@ -19,6 +19,13 @@ const DATA = [
                     author: 'Interactive Developer',
                     link: 'https://youtu.be/kpF0n39xXVM'
                 }
+            },
+            {
+                title: 'Bubbles Interaction',
+                entry: './example/html5-canvas/bubbles/index.html',
+                reference: {
+                    author: 'gyofeel:Gyopil Seo',
+                }
             }
         ]
     },
@@ -60,18 +67,22 @@ const initData = () => {
             const li = document.createElement('li');
             const titleA = document.createElement('a');
             const refDesSpan = document.createElement('span');
-            const refA = document.createElement('a');
+            let refA = null;
             titleA.className = 'title';
             titleA.target = '_blank';
             titleA.href = item.entry;
             titleA.innerHTML = item.title;
             refDesSpan.className = 'ref-description';
-            refA.target = '_blank';
-            refA.href = item.reference.link;
-            refA.innerHTML = item.reference.title;
             refDesSpan.appendChild(document.createTextNode('(ref: '));
-            refDesSpan.appendChild(refA);
-            refDesSpan.appendChild(document.createTextNode(` - ${item.reference.author})`));
+            if (item.reference.link && item.reference.title) {
+                refA = document.createElement('a');
+                refA.target = '_blank';
+                refA.href = item.reference.link;
+                refA.innerHTML = item.reference.title;   
+                refDesSpan.appendChild(refA);
+                refDesSpan.appendChild(document.createTextNode(` - `));
+            }
+            refDesSpan.appendChild(document.createTextNode(`${item.reference.author})`));
             li.appendChild(titleA);
             li.appendChild(refDesSpan);
             ul.appendChild(li);
