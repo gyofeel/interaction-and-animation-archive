@@ -28,7 +28,7 @@ export class Bubble {
         this.dy = 0;
         this.directionX = randomRange(1, 10) % 2 ? -1 : 1;
         this.directionY = randomRange(1, 10) % 2 ? -1 : 1;
-        this.opacity = 0.6;
+        this.opacity = 0.5;
         this.isDead = false;
     }
 
