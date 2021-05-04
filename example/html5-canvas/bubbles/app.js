@@ -1,6 +1,6 @@
 import { Bubble } from './bubble.js';
 
-const NUM_PER_SHOT = 10;
+const NUM_PER_SHOT = 5;
 
 class App {
     constructor() {
@@ -18,9 +18,14 @@ class App {
 
         window.requestAnimationFrame(this.animate.bind(this));
         
-        this.canvas.addEventListener('mousedown', this.onMouseDown.bind(this), false);
-        this.canvas.addEventListener('mouseup', this.onMouseUp.bind(this), false);
-        this.canvas.addEventListener('mousemove', this.onMouseMove.bind(this), false);
+        this.canvas.addEventListener('mousedown', this.onDownHandler.bind(this), false);
+        this.canvas.addEventListener('mouseup', this.onUpHandler.bind(this), false);
+        this.canvas.addEventListener('mousemove', this.onMouseMoveHandler.bind(this), false);
+
+        // mobile
+        this.canvas.addEventListener('touchstart', this.onDownHandler.bind(this), false);
+        this.canvas.addEventListener('touchend', this.onUpHandler.bind(this), false);
+        this.canvas.addEventListener('touchmove', this.onTouchMoveHandler.bind(this), false);
     }
 
     resize() {
@@ -44,24 +49,36 @@ class App {
         }
     }
 
-    onMouseDown(e) {
-        this.isMouseDown = true;
+    onDownHandler(e) {
+        this.isDown = true;
     }
 
-    onMouseUp(e) {
-        this.isMouseDown = false;
+    onUpHandler(e) {
+        this.isDown = false;
     }
 
-    onMouseMove(e) {
-        if (!this.isMouseDown) {
+    onMouseMoveHandler(e) {
+        if (!this.isDown) {
             return;
         }
         const { offsetX, offsetY } = e;
+        
         for (let i = 0; i < NUM_PER_SHOT; i++) {
             this.bubbles.push(new Bubble(offsetX, offsetY));
         }
     }
 
+    onTouchMoveHandler(e) {
+        if (!this.isDown) {
+            return;
+        }
+        const { changedTouches: touches } = e;
+        for (let i = 0; i < NUM_PER_SHOT; i++) {
+            for (let j = 0; j < touches.length; j++) {
+                this.bubbles.push(new Bubble(touches[j].pageX, touches[j].pageY));
+            }
+        }
+    }
 }
 
 window.onload = () => {
