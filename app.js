@@ -24,7 +24,7 @@ const DATA = [
                 title: 'Bubbles Interaction',
                 entry: './example/html5-canvas/bubbles/index.html',
                 reference: {
-                    author: 'gyofeel:Gyopil Seo',
+                    author: 'GYOFEEL',
                 }
             }
         ]
