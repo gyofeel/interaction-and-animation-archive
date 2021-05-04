@@ -69,6 +69,7 @@ class App {
     }
 
     onTouchMoveHandler(e) {
+        e.preventDefault(); 
         if (!this.isDown) {
             return;
         }
