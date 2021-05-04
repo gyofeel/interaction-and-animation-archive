@@ -23,8 +23,6 @@ class App {
         this.canvas.width = this.stageWidth * 2;
         this.canvas.height = this.stageHeight * 2;
         this.ctx.scale(2, 2);
-        // console.log('stageWidth - ', this.stageWidth);
-        // console.log('stageHeight - ', this.stageHeight);
         this.waveGroup.resize(this.stageWidth, this.stageHeight);
     }
 

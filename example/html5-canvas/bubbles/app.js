@@ -1,6 +1,6 @@
 import { Bubble } from './bubble.js';
 
-const NUM_PER_SHOT = 100;
+const NUM_PER_SHOT = 10;
 
 class App {
     constructor() {
@@ -9,15 +9,18 @@ class App {
         this.ctx = this.canvas.getContext('2d');
 
         this.pixelRatio = window.devicePixelRatio > 1 ? 2 : 1;
-
         this.bubbles = [];
+
+        this.isMouseDown = false;
 
         window.addEventListener('resize', this.resize.bind(this));
         this.resize();
 
         window.requestAnimationFrame(this.animate.bind(this));
-
-        this.canvas.addEventListener('click', this.onClick.bind(this), false);
+        
+        this.canvas.addEventListener('mousedown', this.onMouseDown.bind(this), false);
+        this.canvas.addEventListener('mouseup', this.onMouseUp.bind(this), false);
+        this.canvas.addEventListener('mousemove', this.onMouseMove.bind(this), false);
     }
 
     resize() {
@@ -41,7 +44,18 @@ class App {
         }
     }
 
-    onClick(e) {
+    onMouseDown(e) {
+        this.isMouseDown = true;
+    }
+
+    onMouseUp(e) {
+        this.isMouseDown = false;
+    }
+
+    onMouseMove(e) {
+        if (!this.isMouseDown) {
+            return;
+        }
         const { offsetX, offsetY } = e;
         for (let i = 0; i < NUM_PER_SHOT; i++) {
             this.bubbles.push(new Bubble(offsetX, offsetY));

@@ -26,8 +26,9 @@ export class Bubble {
         this.addition = randomRange(MIN_SPEED, MAX_SPEED) / 10;
         this.dx = 0;
         this.dy = 0;
-        this.directionX = randomRange(1, 10) % 2 ? -1 : 1;
-        this.directionY = randomRange(1, 10) % 2 ? -1 : 1;
+        // this.directionX = randomRange(1, 10) % 2 ? -1 : 1;
+        // this.directionY = randomRange(1, 10) % 2 ? -1 : 1;
+        this.directionDegrees = randomRange(0, 360);
         this.opacity = 0.5;
         this.isDead = false;
     }
@@ -35,14 +36,18 @@ export class Bubble {
     animate(ctx) {
         ctx.beginPath();
         ctx.fillStyle = `rgba(${this.red}, ${this.green}, ${this.blue}, ${this.opacity})`;
-        ctx.arc(this.x + this.dx, this.y + this.dy * this.amplitude, this.radius, 0, PI2, false);
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.getRadians(this.directionDegrees));
+        ctx.arc(this.dx, this.dy * this.amplitude, this.radius, 0, PI2, false);
         ctx.fill();
+        ctx.restore();
 
         if (this.amplitude < MIN_AMPLITUDE) {
             this.amplitude = Math.floor(Math.random() * (MAX_AMPLITUDE - MIN_AMPLITUDE) + 1) + MIN_AMPLITUDE;
         }
-        this.dx = this.dx + this.addition * this.directionX;
-        this.dy = Math.sin(this.dx / this.waveLength) * this.directionY;
+        this.dx = this.dx + this.addition;
+        this.dy = Math.sin(this.dx / this.waveLength);
         const _o = this.opacity - (this.opacity / (60 * this.life));
         this.opacity = _o < 0 ? 0 : _o;
 
