@@ -24,9 +24,8 @@ class App {
         this.canvas.addEventListener('click', this.onMouseClickHandler.bind(this), false);
 
         // mobile
-        this.canvas.addEventListener('touchstart', this.onDownHandler.bind(this), false);
-        this.canvas.addEventListener('touchend', this.onUpHandler.bind(this), false);
-        this.canvas.addEventListener('touchmove', this.onTouchMoveHandler.bind(this), false);
+        this.canvas.addEventListener('touchstart', this.onTouchHandler.bind(this), false);
+        this.canvas.addEventListener('touchmove', this.onTouchHandler.bind(this), false);
     }
 
     resize() {
@@ -77,11 +76,8 @@ class App {
         }
     }
 
-    onTouchMoveHandler(e) {
+    onTouchHandler(e) {
         e.preventDefault(); 
-        if (!this.isDown) {
-            return;
-        }
         const { changedTouches: touches } = e;
         for (let i = 0; i < NUM_PER_SHOT; i++) {
             for (let j = 0; j < touches.length; j++) {
