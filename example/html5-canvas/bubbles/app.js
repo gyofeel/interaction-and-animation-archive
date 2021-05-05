@@ -21,6 +21,7 @@ class App {
         this.canvas.addEventListener('mousedown', this.onDownHandler.bind(this), false);
         this.canvas.addEventListener('mouseup', this.onUpHandler.bind(this), false);
         this.canvas.addEventListener('mousemove', this.onMouseMoveHandler.bind(this), false);
+        this.canvas.addEventListener('click', this.onMouseClickHandler.bind(this), false);
 
         // mobile
         this.canvas.addEventListener('touchstart', this.onDownHandler.bind(this), false);
@@ -61,6 +62,14 @@ class App {
         if (!this.isDown) {
             return;
         }
+        const { offsetX, offsetY } = e;
+        
+        for (let i = 0; i < NUM_PER_SHOT; i++) {
+            this.bubbles.push(new Bubble(offsetX, offsetY));
+        }
+    }
+
+    onMouseClickHandler(e) {
         const { offsetX, offsetY } = e;
         
         for (let i = 0; i < NUM_PER_SHOT; i++) {
